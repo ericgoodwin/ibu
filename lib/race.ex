@@ -17,7 +17,8 @@ defmodule Ibu.Race do
     :start_mode,
     :start_time,
     :status_code,
-    :status_text
+    :status_text,
+    :event_id
   ])
 
   @type t :: %__MODULE__{
@@ -36,7 +37,8 @@ defmodule Ibu.Race do
           start_mode: binary,
           start_time: DateTime.t(),
           status_code: integer,
-          status_text: binary
+          status_text: binary,
+          event_id: binary
         }
 
   @spec complete?(t) :: boolean
@@ -61,7 +63,8 @@ defmodule Ibu.Race do
       start_mode: data["StartMode"],
       start_time: data["StartTime"] |> to_date_time,
       status_code: data["StatusId"],
-      status_text: data["StatusText"]
+      status_text: data["StatusText"],
+      event_id: data["EventId"]
     }
   end
 end
