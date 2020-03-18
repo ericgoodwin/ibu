@@ -1,7 +1,6 @@
 defmodule Ibu.Athlete do
   import Ibu.DateHelper, only: [to_birth_date: 1]
 
-  @enforce_keys [:family_name, :given_name, :birth_date, :gender, :ibu_id, :country_code]
   defstruct([
     :family_name,
     :given_name,
@@ -10,18 +9,20 @@ defmodule Ibu.Athlete do
     :ibu_id,
     :flag_uri,
     :photo_uri,
-    :country_code
+    :country_code,
+    :status
   ])
 
   @type t :: %__MODULE__{
           family_name: binary,
           given_name: binary,
-          birth_date: Date.t,
+          birth_date: Date.t(),
           gender: binary,
           ibu_id: binary,
           flag_uri: binary,
           photo_uri: binary,
-          country_code: binary
+          country_code: binary,
+          status: binary,
         }
 
   @spec build_from_api(map) :: t
@@ -34,7 +35,12 @@ defmodule Ibu.Athlete do
       ibu_id: data["IBUId"],
       flag_uri: data["FlagURI"],
       photo_uri: data["PhotoURI"],
-      country_code: data["NAT"]
+      country_code: data["NAT"],
+      status: get_status(data["Functions"]),
     }
   end
+
+  @spec get_status(binary) :: binary
+  defp get_status("Athlete"), do: "active"
+  defp get_status("Not active"), do: "inactive"
 end
