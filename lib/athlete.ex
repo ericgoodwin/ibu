@@ -1,5 +1,5 @@
 defmodule Ibu.Athlete do
-  import Ibu.Helper, only: [to_birth_date: 1]
+  import Ibu.DateHelper, only: [to_birth_date: 1]
 
   @enforce_keys [:family_name, :given_name, :birth_date, :gender, :ibu_id, :country_code]
   defstruct([
