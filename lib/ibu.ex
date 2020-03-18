@@ -21,7 +21,7 @@ defmodule Ibu do
           |> Map.get(:body)
           |> Map.get("Athletes")
           |> Enum.filter(fn athlete ->
-             Enum.member?(["Athlete" ,"Not active"], Map.get(athlete, "Functions"))
+            Enum.member?(["Athlete", "Not active"], Map.get(athlete, "Functions"))
           end)
           |> Enum.map(&Athlete.build_from_api/1)
 

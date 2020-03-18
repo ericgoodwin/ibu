@@ -12,6 +12,8 @@ defmodule DateHelperTest do
 
   test "to_date_time" do
     assert DateHelper.to_date_time(nil) == nil
-    assert DateHelper.to_date_time("2020-01-10T12:00:00Z") == DateTime.from_naive!(~N[2020-01-10 12:00:00], "Etc/UTC")
+
+    assert DateHelper.to_date_time("2020-01-10T12:00:00Z") ==
+             DateTime.from_naive!(~N[2020-01-10 12:00:00], "Etc/UTC")
   end
 end

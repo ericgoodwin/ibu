@@ -22,7 +22,7 @@ defmodule Ibu.Athlete do
           flag_uri: binary,
           photo_uri: binary,
           country_code: binary,
-          status: binary,
+          status: binary
         }
 
   @spec build_from_api(map) :: t
@@ -36,11 +36,13 @@ defmodule Ibu.Athlete do
       flag_uri: data["FlagURI"],
       photo_uri: data["PhotoURI"],
       country_code: data["NAT"],
-      status: get_status(data["Functions"]),
+      status: get_status(data["Functions"])
     }
   end
 
   @spec get_status(binary) :: binary
-  defp get_status("Athlete"), do: "active"
+  defp get_status("Athlete"), do: "athlete"
+  defp get_status("Athlete, Official"), do: "athlete"
   defp get_status("Not active"), do: "inactive"
+  defp get_status("Official"), do: "official"
 end

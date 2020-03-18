@@ -8,7 +8,7 @@ defmodule Ibu.DateHelper do
       str
       |> fix_incorrect_datetime_format
       |> transform_date_format_to_datetime
-      |> DateTime.from_iso8601
+      |> DateTime.from_iso8601()
 
     birth_date |> DateTime.to_date()
   end

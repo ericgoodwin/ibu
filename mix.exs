@@ -26,7 +26,7 @@ defmodule Ibu.MixProject do
       {:dialyxir, "~> 0.5", only: [:dev], runtime: false},
       {:hackney, "~> 1.15.2"},
       {:jason, ">= 1.0.0"},
-      {:tesla, "~> 1.3.0"},
+      {:tesla, "~> 1.3.0"}
     ]
   end
 end

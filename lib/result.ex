@@ -1,6 +1,36 @@
 defmodule Ibu.Result do
-
-  defstruct([:order, :athlete_ibu_id, :race_ibu_id, :country_code, :behind, :bib, :bib_color, :irm, :leg, :leg_rank, :nc, :noc, :name, :pursuit_start_distance, :rank, :result, :run_time, :shooting_total, :shootings, :short_name, :start_group, :start_info, :start_lane, :start_order, :start_row, :start_time, :team_id, :team_rank_after_leg, :total_time, :wc])
+  defstruct([
+    :order,
+    :athlete_ibu_id,
+    :race_ibu_id,
+    :country_code,
+    :behind,
+    :bib,
+    :bib_color,
+    :irm,
+    :leg,
+    :leg_rank,
+    :nc,
+    :noc,
+    :name,
+    :pursuit_start_distance,
+    :rank,
+    :result,
+    :run_time,
+    :shooting_total,
+    :shootings,
+    :short_name,
+    :start_group,
+    :start_info,
+    :start_lane,
+    :start_order,
+    :start_row,
+    :start_time,
+    :team_id,
+    :team_rank_after_leg,
+    :total_time,
+    :wc
+  ])
 
   @type t :: %__MODULE__{
           order: integer,
@@ -32,7 +62,7 @@ defmodule Ibu.Result do
           team_id: binary,
           team_rank_after_leg: binary,
           total_time: binary,
-          wc: binary,
+          wc: binary
         }
 
   @spec build_from_api(map, binary) :: t
@@ -67,7 +97,7 @@ defmodule Ibu.Result do
       team_id: data["TeamId"],
       team_rank_after_leg: data["TeamRankAfterLeg"],
       total_time: data["TotalTime"],
-      wc: data["WC"],
+      wc: data["WC"]
     }
   end
 end
