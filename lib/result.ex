@@ -1,12 +1,38 @@
 defmodule Ibu.Result do
-  @enforce_keys [:order, :athlete_ibu_id, :race_ibu_id, :country_code]
-  defstruct([:order, :athlete_ibu_id, :race_ibu_id, :country_code])
+
+  defstruct([:order, :athlete_ibu_id, :race_ibu_id, :country_code, :behind, :bib, :bib_color, :irm, :leg, :leg_rank, :nc, :noc, :name, :pursuit_start_distance, :rank, :result, :run_time, :shooting_total, :shootings, :short_name, :start_group, :start_info, :start_lane, :start_order, :start_row, :start_time, :team_id, :team_rank_after_leg, :total_time, :wc])
 
   @type t :: %__MODULE__{
           order: integer,
           athlete_ibu_id: binary,
           race_ibu_id: binary,
-          country_code: binary
+          country_code: binary,
+          behind: binary,
+          bib: binary,
+          bib_color: binary,
+          irm: binary,
+          leg: binary,
+          leg_rank: binary,
+          nc: binary,
+          noc: binary,
+          name: binary,
+          pursuit_start_distance: integer,
+          rank: binary,
+          result: binary,
+          run_time: binary,
+          shooting_total: binary,
+          shootings: binary,
+          short_name: binary,
+          start_group: binary,
+          start_info: binary,
+          start_lane: binary,
+          start_order: integer,
+          start_row: integer,
+          start_time: binary,
+          team_id: binary,
+          team_rank_after_leg: binary,
+          total_time: binary,
+          wc: binary,
         }
 
   @spec build_from_api(map, binary) :: t
@@ -15,41 +41,33 @@ defmodule Ibu.Result do
       order: data["ResultOrder"],
       athlete_ibu_id: data["IBUId"],
       country_code: data["Nat"],
-      race_ibu_id: race_id
+      race_ibu_id: race_id,
+      behind: data["Behind"],
+      bib: data["Bib"],
+      bib_color: data["BibColor"],
+      irm: data["IRM"],
+      leg: data["Leg"],
+      leg_rank: data["LegRank"],
+      nc: data["NC"],
+      noc: data["NOC"],
+      name: data["Name"],
+      pursuit_start_distance: data["PursuitStartDistance"],
+      rank: data["Rank"],
+      result: data["Result"],
+      run_time: data["RunTime"],
+      shooting_total: data["ShootingTotal"],
+      shootings: data["Shootings"],
+      short_name: data["ShortName"],
+      start_group: data["StartGroup"],
+      start_info: data["StartInfo"],
+      start_lane: data["StartLane"],
+      start_order: data["StartOrder"],
+      start_row: data["StartRow"],
+      start_time: data["StartTime"],
+      team_id: data["TeamId"],
+      team_rank_after_leg: data["TeamRankAfterLeg"],
+      total_time: data["TotalTime"],
+      wc: data["WC"],
     }
   end
 end
-
-# %{
-# "Behind" => "+9:05.9",
-# "Bib" => "88",
-# "BibColor" => nil,
-# "IBUId" => "BTCHN21512199501",
-# "IRM" => nil,
-# "Leg" => nil,
-# "LegRank" => nil,
-# "NC" => "41",
-# "NOC" => nil,
-# "Name" => "ZHANG Zhaohan",
-# "Nat" => "CHN",
-# "PursuitStartDistance" => 0,
-# "Rank" => "90",
-# "Result" => "+9:05.9",
-# "ResultOrder" => 90,
-# "RunTime" => nil,
-# "ShootingTotal" => "6",
-# "Shootings" => "1+2+1+2",
-# "ShortName" => "ZHANG Z.",
-# "StartGroup" => nil,
-# "StartInfo" => "17:02:45",
-# "StartLane" => 0,
-# "StartOrder" => 88,
-# "StartRow" => 0,
-# "StartTime" => "2019-12-05T16:02:45Z",
-# "TeamId" => nil,
-# "TeamRankAfterLeg" => nil,
-# "TotalTime" => "51:41.0",
-# "WC" => ""}
-
-# %{"Behind" => "0.0", "Bib" => "1", "BibColor" => nil, "IBUId" => "BTNOR2          ", "IRM" => nil, "Leg" => 0, "LegRank" => nil, "NC" => "420", "NOC" => nil, "Name" => "NORWAY", "Nat" => "NOR", "PursuitStartDistance" => 0, "Rank" => "1", "Result" => "1:11:08.7", "ResultOrder" => 1, "RunTime" => nil, "ShootingTotal" => "0+10", "Shootings" => "0+4 0+6", "ShortName" => "NORWAY", "StartGroup" => nil, "StartInfo" => "Row 1", "StartLane" => 1, "StartOrder" => 1, "StartRow" => 1, "StartTime" => "0001-01-01T00:00:00", "TeamId" => nil, "TeamRankAfterLeg" => nil, "TotalTime" => "1:11:08.7", "WC" => "60"}
-# %{"Behind" => "+13.0", "Bib" => "1", "BibColor" => nil, "IBUId" => "BTNOR20601199501", "IRM" => nil, "Leg" => 1, "LegRank" => "2", "NC" => nil, "NOC" => nil, "Name" => "KNOTTEN Karoline Offigstad", "Nat" => "NOR", "PursuitStartDistance" => 0, "Rank" => "1", "Result" => "+13.0", "ResultOrder" => 1, "RunTime" => nil, "ShootingTotal" => "0+1", "Shootings" => "0+1 0+0", "ShortName" => "KNOTTEN K.", "StartGroup" => nil, "StartInfo" => "Row 1", "StartLane" => 1, "StartOrder" => 2, "StartRow" => 1, "StartTime" => "0001-01-01T00:00:00", "TeamId" => nil, "TeamRankAfterLeg" => "2", "TotalTime" => "17:08.6", "WC" => nil}
