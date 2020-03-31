@@ -27,6 +27,9 @@ defmodule Ibu.Athlete do
 
   @spec build_from_api(map) :: t
   def build_from_api(data) when is_map(data) do
+    IO.puts "--------------------------------------------------------------------------------------"
+    IO.puts data |> inspect
+    IO.puts "--------------------------------------------------------------------------------------"
     %__MODULE__{
       family_name: data["FamilyName"],
       given_name: data["GivenName"],
