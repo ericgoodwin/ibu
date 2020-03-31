@@ -62,7 +62,7 @@ defmodule Ibu.Result do
           team_id: binary,
           team_rank_after_leg: binary,
           total_time: binary,
-          wc: binary
+          wc: integer
         }
 
   @spec build_from_api(map, binary) :: t
@@ -97,7 +97,13 @@ defmodule Ibu.Result do
       team_id: data["TeamId"],
       team_rank_after_leg: data["TeamRankAfterLeg"],
       total_time: data["TotalTime"],
-      wc: data["WC"]
+      wc: world_cup_points(data["WC"])
     }
   end
+
+  @spec world_cup_points(nil | binary) :: integer
+  defp world_cup_points(""), do: 0
+  defp world_cup_points(nil), do: 0
+  defp world_cup_points(string) when is_binary(string), do: String.to_integer(string)
+
 end
