@@ -42,4 +42,15 @@ defmodule ParseTest do
              {:event, :mass_start}
            ] = data
   end
+
+  test "competition" do
+    assert @error = Parse.ibu_id(nil)
+    assert {:competition, data} = Parse.ibu_id("BT1920SWRLCP02")
+
+    assert [
+             {:season, "1920"},
+             {:level, :world_cup},
+             {:world_cup_number, 2}
+           ] = data
+  end
 end

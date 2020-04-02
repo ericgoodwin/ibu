@@ -36,6 +36,19 @@ defmodule Ibu.Parse do
      ]}
   end
 
+  def ibu_id(
+        <<66, 84, season::binary-size(4), 83, level::binary-size(5),
+          world_cup_number::binary-size(2)>>
+      )
+      when level in ["WRLCP", "WRLCH"] do
+    {:competition,
+     [
+       season: season,
+       level: parse_level(level),
+       world_cup_number: parse_world_cup_number(world_cup_number)
+     ]}
+  end
+
   def ibu_id(_), do: {:error, :unknown_format}
 
   @spec parse_gender(binary) :: atom
