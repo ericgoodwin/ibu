@@ -69,7 +69,7 @@ defmodule Ibu.Result do
   def build_from_api(data, race_id) when is_map(data) do
     %__MODULE__{
       order: data["ResultOrder"],
-      athlete_ibu_id: data["IBUId"],
+      athlete_ibu_id: String.trim(data["IBUId"]),
       country_code: data["Nat"],
       race_ibu_id: race_id,
       behind: data["Behind"],
