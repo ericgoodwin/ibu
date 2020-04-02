@@ -105,5 +105,4 @@ defmodule Ibu.Result do
   defp world_cup_points(""), do: 0
   defp world_cup_points(nil), do: 0
   defp world_cup_points(string) when is_binary(string), do: String.to_integer(string)
-
 end

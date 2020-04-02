@@ -145,4 +145,3 @@ defmodule Ibu do
     end
   end
 end
-
