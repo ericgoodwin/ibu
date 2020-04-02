@@ -75,7 +75,7 @@ defmodule Ibu do
   Get the details for a single race
 
   ## Examples
-    iex> Ibu.get_race_details("BT1920SWRLCP08MXRL")
+    iex> Ibu.get_race_details("BT1920SWRLCP03SMSP")
     {:ok, %Ibu.Race{...}, %Ibu.Event{...}, []}
   """
   @spec get_race_details(binary) :: {:ok, Race.t(), Event.t(), list} | {:error, any()}
@@ -145,3 +145,4 @@ defmodule Ibu do
     end
   end
 end
+
