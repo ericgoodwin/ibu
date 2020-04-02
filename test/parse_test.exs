@@ -33,12 +33,13 @@ defmodule ParseTest do
   test "race" do
     assert @error = Parse.ibu_id(nil)
     assert {:race, data} = Parse.ibu_id("BT1920SWRLCP07SMMS")
+
     assert [
              {:season, "1920"},
-             {:level, "WRLCP"},
+             {:level, :world_cup},
              {:world_cup_number, 7},
              {:gender, :male},
-             {:event, :mass_start},
+             {:event, :mass_start}
            ] = data
   end
 end

@@ -22,14 +22,14 @@ defmodule Ibu.Parse do
   end
 
   def ibu_id(
-        <<66, 84, season::binary-size(4), 83, level::binary-size(5), world_cup_number::binary-size(2),
-          gender::binary-size(2), event::binary-size(2)>>
+        <<66, 84, season::binary-size(4), 83, level::binary-size(5),
+          world_cup_number::binary-size(2), gender::binary-size(2), event::binary-size(2)>>
       )
       when gender in ["SM", "SW", "MX"] and level in ["WRLCP", "WRLCH"] do
     {:race,
      [
        season: season,
-       level: level,
+       level: parse_level(level),
        world_cup_number: parse_world_cup_number(world_cup_number),
        gender: parse_gender(gender),
        event: parse_event_code(event)
@@ -45,6 +45,9 @@ defmodule Ibu.Parse do
   defp parse_gender("1"), do: :male
   defp parse_gender("2"), do: :female
   defp parse_gender("9"), do: :mixed
+
+  defp parse_level("WRLCH"), do: :world_championship
+  defp parse_level("WRLCP"), do: :world_cup
 
   defp parse_event_code("MS"), do: :mass_start
   defp parse_event_code("RL"), do: :relay
