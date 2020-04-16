@@ -129,6 +129,13 @@ defmodule Ibu do
     end
   end
 
+  @doc """
+  Get all details for an athlete
+
+  ## Examples
+    iex> Ibu.get_athlete_details("BTGER12403199001")
+    {:ok, [%Ibu.Athlete{...}]}
+  """
   @spec get_athlete_details(binary) :: {:ok, Athlete.t()} | {:error, any()}
   def get_athlete_details(ibu_id) do
     case get("CISBios?IBUId=#{ibu_id}") do
