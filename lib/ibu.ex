@@ -138,7 +138,7 @@ defmodule Ibu do
   """
   @spec get_athlete_details(binary) :: {:ok, Athlete.t()} | {:error, any()}
   def get_athlete_details(ibu_id) do
-    case get("CISBios?IBUId=#{ibu_id}") do
+    case get("CISBios?IBUId=#{String.trim(ibu_id)}") do
       {:error, reason} ->
         {:error, reason}
 
