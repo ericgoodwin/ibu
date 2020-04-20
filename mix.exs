@@ -17,7 +17,7 @@ defmodule Ibu.MixProject do
     ]
   end
 
-  defp description() do
+  def description() do
     "A small wrapper around the IBU API"
   end
 
@@ -30,7 +30,7 @@ defmodule Ibu.MixProject do
     ]
   end
 
-  defp package() do
+  def package() do
     [
       name: "IBU",
       files: ~w(lib .formatter.exs mix.exs LICENSE README*),
