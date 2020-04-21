@@ -1,7 +1,7 @@
 defmodule ParseTest do
   use ExUnit.Case
-  doctest Ibu.Parse
-  alias Ibu.Parse
+  doctest Ibu.Codes.Parse
+  alias Ibu.Codes.Parse
 
   @error {:error, :unknown_format}
 

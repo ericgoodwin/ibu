@@ -1,4 +1,4 @@
-defmodule Ibu.Parse do
+defmodule Ibu.Codes.Parse do
   @spec ibu_id(binary) :: {atom, keyword}
   def ibu_id(<<66, 84, country_code::binary-size(3), gender::binary-size(1)>>)
       when gender in ["1", "2", "9"] do
