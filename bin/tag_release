@@ -1,0 +1,44 @@
+#!/usr/bin/env bash
+
+set -euf -o pipefail
+
+## Usage:
+#
+#  Just provide the version number to update, commit, and tag:
+#
+#      $ ./bin/tag_release 0.1.4
+
+VERSION_FILE="./VERSION"
+GIT="$(which git)"
+
+GIT_REMOTE="origin"
+SOURCE_REF="master"
+
+if ! [[ -e "$VERSION_FILE" ]]; then
+  echo "ERROR: could not locate VERSION file."
+  echo "Are you in the root of the project directory?"
+  exit 1
+fi
+
+if [[ "${1:-}" = "" ]] ; then
+  echo "Provide a version number as first and only argument."
+  echo "Hint: Current version is $(cat $VERSION_FILE)"
+  exit 2
+fi
+
+VERSION="$1"
+
+main () {
+  echo $VERSION > "$VERSION_FILE"
+
+  "$GIT" add "$VERSION_FILE"
+  "$GIT" commit -S -m "Update version to $VERSION"
+  "$GIT" tag -s -a "v$VERSION" -m "Version $VERSION"
+
+  if ! [[ "$@" =~ "--no-push" ]] ; then
+    "$GIT" push "$GIT_REMOTE" --tags
+    "$GIT" push "$GIT_REMOTE" "$SOURCE_REF"
+  fi
+}
+
+main
