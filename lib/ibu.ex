@@ -7,7 +7,7 @@ defmodule Ibu do
   plug(Tesla.Middleware.Timeout, timeout: 5_000)
   plug(Tesla.Middleware.Logger)
 
-  alias Ibu.{Athlete, Event, Result, Race}
+  alias Ibu.{Athlete, Event, Result, Race, Codes, Standing, Cup}
 
   @spec search_athletes(binary, binary | nil) :: {:ok, [Athlete.t()]} | {:error, any()}
   def search_athletes(last_name, first_name \\ nil) do
@@ -27,6 +27,60 @@ defmodule Ibu do
 
         {:ok, result}
     end
+  end
+
+  @spec get_standings(binary) :: {:error, any} | {:ok, [Ibu.Standing.t()]}
+  @doc """
+  ## Examples
+      iex> Ibu.get_standings("BT1920SWRLCP__SWIN")
+      {:ok,
+        [
+          %Ibu.Standing{
+            as_of: ~U[2020-03-13 17:39:17Z],
+            athlete_ibu_id: "NOR",
+            cup_ibu_id: "BT1920SWRLCP__SMNC",
+            rank: 1,
+            result_order: 1,
+            score: 8192
+          },
+          ...
+        ]
+      }
+  """
+  def get_standings(cup_ibu_id) do
+    case get("CupResults?CupId=#{cup_ibu_id}") do
+      {:error, reason} ->
+        {:error, reason}
+
+      {:ok, response} ->
+        body = Map.get(response, :body)
+
+        result =
+          Map.get(body, "Rows")
+          |> Enum.map(&Standing.build_from_api(&1, cup_ibu_id, body["AsOf"]))
+
+        {:ok, result}
+    end
+  end
+
+  def get_cups(season_id) do
+    cups =
+      Enum.map(Ibu.Cup.ibu_ids(season_id), fn value ->
+        case get("CupResults?CupId=#{value}") do
+          {:error, reason} ->
+            {:error, reason}
+
+          {:ok, response} ->
+            result =
+              response
+              |> Map.get(:body)
+              |> Cup.build_from_api()
+
+            result
+        end
+      end)
+
+    {:ok, cups}
   end
 
   @spec get_events(integer) :: {:ok, [Event.t()]} | {:error, any()}
