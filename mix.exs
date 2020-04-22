@@ -4,8 +4,8 @@ defmodule Ibu.MixProject do
   def project() do
     [
       app: :ibu,
-      version: "0.1.0",
-      elixir: "~> 1.6",
+      version: String.trim(File.read!("./VERSION")),
+      elixir: "~> 1.10",
       start_permanent: Mix.env() == :prod,
       deps: deps()
     ]
