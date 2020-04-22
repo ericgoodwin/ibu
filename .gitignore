@@ -24,3 +24,4 @@ ibu-*.tar
 
 /.DS_Store
 /.elixir_ls
+/example_responses
