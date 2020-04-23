@@ -74,7 +74,7 @@ defmodule Ibu do
           |> Map.get(:body)
           |> Cup.build_from_api()
 
-        result
+        {:ok, result}
     end
   end
 
