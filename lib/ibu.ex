@@ -7,7 +7,7 @@ defmodule Ibu do
   plug(Tesla.Middleware.Timeout, timeout: 5_000)
   plug(Tesla.Middleware.Logger)
 
-  alias Ibu.{Athlete, Event, Result, Race, Codes, Standing, Cup}
+  alias Ibu.{Athlete, Event, Result, Race, Standing, Cup}
 
   @spec search_athletes(binary, binary | nil) :: {:ok, [Athlete.t()]} | {:error, any()}
   def search_athletes(last_name, first_name \\ nil) do
@@ -63,24 +63,19 @@ defmodule Ibu do
     end
   end
 
-  def get_cups(season_id) do
-    cups =
-      Enum.map(Ibu.Cup.ibu_ids(season_id), fn value ->
-        case get("CupResults?CupId=#{value}") do
-          {:error, reason} ->
-            {:error, reason}
+  def get_cup(cup_ibu_id) do
+    case get("CupResults?CupId=#{cup_ibu_id}") do
+      {:error, reason} ->
+        {:error, reason}
 
-          {:ok, response} ->
-            result =
-              response
-              |> Map.get(:body)
-              |> Cup.build_from_api()
+      {:ok, response} ->
+        result =
+          response
+          |> Map.get(:body)
+          |> Cup.build_from_api()
 
-            result
-        end
-      end)
-
-    {:ok, cups}
+        result
+    end
   end
 
   @spec get_events(integer) :: {:ok, [Event.t()]} | {:error, any()}
