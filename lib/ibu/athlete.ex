@@ -1,5 +1,5 @@
-defmodule Ibu.Athlete do
-  import Ibu.DateHelper, only: [to_birth_date: 1]
+defmodule IBU.Athlete do
+  import IBU.DateHelper, only: [to_birth_date: 1]
 
   defstruct([
     :family_name,

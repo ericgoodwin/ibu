@@ -1,5 +1,5 @@
-defmodule Ibu.Cup do
-  import Ibu.DateHelper, only: [to_date_time: 1]
+defmodule IBU.Cup do
+  import IBU.DateHelper, only: [to_date_time: 1]
 
   defstruct([
     :ibu_id,
@@ -28,19 +28,21 @@ defmodule Ibu.Cup do
     %__MODULE__{
       ibu_id: data["CupId"],
       as_of: data["AsOf"] |> to_date_time,
-      description: data["CupInfo"] |> String.capitalize,
+      description: data["CupInfo"] |> String.capitalize(),
       name: data["CupName"],
       short_name: data["CupShortName"],
       completed_races: data["RaceCount"],
       total_races: data["TotalRaces"],
-      standings: Enum.map(data["Rows"], &Ibu.Standing.build_from_api(&1, data["CupId"], data["AsOf"]))
+      standings:
+        Enum.map(data["Rows"], &IBU.Standing.build_from_api(&1, data["CupId"], data["AsOf"]))
     }
   end
 
   @spec ibu_ids(integer) :: [binary]
   def ibu_ids(season_id) do
     prefix = ["BT#{season_id}SWRLCP__"]
-    Enum.reduce(~w(TS IN PU MS RL SP NC), ["#{prefix}MXRL"], fn (type, acc) ->
+
+    Enum.reduce(~w(TS IN PU MS RL SP NC), ["#{prefix}MXRL"], fn type, acc ->
       ["#{prefix}SW#{type}", "#{prefix}SM#{type}"] ++ acc
     end)
   end

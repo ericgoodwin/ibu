@@ -1,5 +1,5 @@
-defmodule Ibu.Event do
-  import Ibu.DateHelper, only: [to_date_time: 1]
+defmodule IBU.Event do
+  import IBU.DateHelper, only: [to_date_time: 1]
 
   defstruct([
     :country_code,

@@ -1,4 +1,4 @@
-defmodule Ibu do
+defmodule IBU do
   use Tesla, only: [:get]
 
   plug(Tesla.Middleware.BaseUrl, "https://biathlonresults.com/modules/sportapi/api/")
@@ -7,7 +7,7 @@ defmodule Ibu do
   plug(Tesla.Middleware.Timeout, timeout: 5_000)
   plug(Tesla.Middleware.Logger)
 
-  alias Ibu.{Athlete, Event, Result, Race, Standing, Cup}
+  alias IBU.{Athlete, Event, Result, Race, Standing, Cup}
 
   @spec search_athletes(binary, binary | nil) :: {:ok, [Athlete.t()]} | {:error, any()}
   def search_athletes(last_name, first_name \\ nil) do
@@ -29,13 +29,13 @@ defmodule Ibu do
     end
   end
 
-  @spec get_standings(binary) :: {:error, any} | {:ok, [Ibu.Standing.t()]}
+  @spec get_standings(binary) :: {:error, any} | {:ok, [IBU.Standing.t()]}
   @doc """
   ## Examples
-      iex> Ibu.get_standings("BT1920SWRLCP__SWIN")
+      iex> IBU.get_standings("BT1920SWRLCP__SWIN")
       {:ok,
         [
-          %Ibu.Standing{
+          %IBU.Standing{
             as_of: ~U[2020-03-13 17:39:17Z],
             athlete_ibu_id: "NOR",
             cup_ibu_id: "BT1920SWRLCP__SMNC",
@@ -101,8 +101,8 @@ defmodule Ibu do
   Get the details for a all the races at an event
 
   ## Examples
-    iex> Ibu.get_event_races("BT1920SWRLCP08")
-    {:ok, [%Ibu.Race{...}]}
+    iex> IBU.get_event_races("BT1920SWRLCP08")
+    {:ok, [%IBU.Race{...}]}
   """
   @spec get_event_races(binary) :: {:ok, [Race.t()]} | {:error, any()}
   def get_event_races(event_id) do
@@ -124,8 +124,8 @@ defmodule Ibu do
   Get the details for a single race
 
   ## Examples
-    iex> Ibu.get_race_details("BT1920SWRLCP03SMSP")
-    {:ok, %Ibu.Race{...}, %Ibu.Event{...}, []}
+    iex> IBU.get_race_details("BT1920SWRLCP03SMSP")
+    {:ok, %IBU.Race{...}, %IBU.Event{...}, []}
   """
   @spec get_race_details(binary) :: {:ok, Race.t(), Event.t(), list} | {:error, any()}
   def get_race_details(race_id) do
@@ -182,8 +182,8 @@ defmodule Ibu do
   Get all details for an athlete
 
   ## Examples
-    iex> Ibu.get_athlete_details("BTGER12403199001")
-    {:ok, [%Ibu.Athlete{...}]}
+    iex> IBU.get_athlete_details("BTGER12403199001")
+    {:ok, [%IBU.Athlete{...}]}
   """
   @spec get_athlete_details(binary) :: {:ok, Athlete.t()} | {:error, any()}
   def get_athlete_details(ibu_id) do

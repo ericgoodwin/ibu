@@ -1,4 +1,4 @@
-defmodule Ibu.DateHelper do
+defmodule IBU.DateHelper do
   @spec to_birth_date(nil) :: nil
   def to_birth_date(nil), do: nil
 

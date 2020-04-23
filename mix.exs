@@ -1,4 +1,4 @@
-defmodule Ibu.MixProject do
+defmodule IBU.MixProject do
   use Mix.Project
 
   def project() do

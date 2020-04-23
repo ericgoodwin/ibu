@@ -1,7 +1,7 @@
 defmodule DateHelperTest do
   use ExUnit.Case
-  doctest Ibu.DateHelper
-  alias Ibu.DateHelper
+  doctest IBU.DateHelper
+  alias IBU.DateHelper
 
   test "to_birth_date" do
     assert DateHelper.to_birth_date(nil) == nil

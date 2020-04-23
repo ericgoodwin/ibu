@@ -1,4 +1,4 @@
-defmodule Ibu.Result do
+defmodule IBU.Result do
   defstruct([
     :order,
     :athlete_ibu_id,

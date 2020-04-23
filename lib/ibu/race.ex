@@ -1,5 +1,5 @@
-defmodule Ibu.Race do
-  import Ibu.DateHelper, only: [to_date_time: 1]
+defmodule IBU.Race do
+  import IBU.DateHelper, only: [to_date_time: 1]
 
   defstruct([
     :category_code,

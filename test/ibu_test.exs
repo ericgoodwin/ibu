@@ -1,6 +1,7 @@
-defmodule IbuTest do
+defmodule IBUTest do
   use ExUnit.Case
-  # doctest Ibu
+
+  # doctest IBU
 
   setup do
     Tesla.Mock.mock(fn
@@ -48,11 +49,11 @@ defmodule IbuTest do
   end
 
   test "search_athletes" do
-    response = Ibu.search_athletes("fourcade")
+    response = IBU.search_athletes("fourcade")
 
     assert {:ok,
             [
-              %Ibu.Athlete{
+              %IBU.Athlete{
                 birth_date: ~D[1988-09-14],
                 country_code: "FRA",
                 family_name: "FOURCADE",

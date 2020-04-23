@@ -1,5 +1,5 @@
-defmodule Ibu.Standing do
-  import Ibu.DateHelper, only: [to_date_time: 1]
+defmodule IBU.Standing do
+  import IBU.DateHelper, only: [to_date_time: 1]
 
   defstruct([
     :athlete_ibu_id,
