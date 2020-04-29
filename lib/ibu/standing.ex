@@ -22,7 +22,7 @@ defmodule IBU.Standing do
   @spec build_from_api(map, binary, binary) :: t
   def build_from_api(data, cup_id, as_of) when is_map(data) do
     %__MODULE__{
-      athlete_ibu_id: data["IBUId"],
+      athlete_ibu_id: String.trim(data["IBUId"]),
       rank: String.to_integer(data["Rank"]),
       result_order: data["ResultOrder"],
       score: String.to_integer(data["Score"]),

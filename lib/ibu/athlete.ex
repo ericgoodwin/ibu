@@ -1,5 +1,6 @@
 defmodule IBU.Athlete do
   import IBU.DateHelper, only: [to_birth_date: 1]
+  alias IBU.Stats
 
   defstruct([
     :family_name,
@@ -10,7 +11,8 @@ defmodule IBU.Athlete do
     :flag_uri,
     :photo_uri,
     :country_code,
-    :status
+    :status,
+    :stats
   ])
 
   @type t :: %__MODULE__{
@@ -22,7 +24,8 @@ defmodule IBU.Athlete do
           flag_uri: binary,
           photo_uri: binary,
           country_code: binary,
-          status: binary
+          status: binary,
+          stats: list
         }
 
   @spec build_from_api(map) :: t
@@ -36,7 +39,8 @@ defmodule IBU.Athlete do
       flag_uri: data["FlagURI"],
       photo_uri: data["PhotoURI"],
       country_code: data["NAT"],
-      status: get_status(data["Functions"])
+      status: get_status(data["Functions"]),
+      stats: Stats.build(data)
     }
   end
 
