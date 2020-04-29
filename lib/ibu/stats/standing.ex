@@ -18,11 +18,11 @@ defmodule IBU.Stats.Standing do
       |> Enum.find(fn x -> Map.get(x, "Year") == ibu_key end)
 
     standings = %{
-      individual_standings: season |> get_standing("Ind"),
-      sprint_standings: season |> get_standing("Spr"),
-      pursuit_standings: season |> get_standing("Pur"),
-      mass_start_standings: season |> get_standing("Mas"),
-      overall_standings: season |> get_standing("Tot")
+      standings_individual: season |> get_standing("Ind"),
+      standings_sprint: season |> get_standing("Spr"),
+      standings_pursuit: season |> get_standing("Pur"),
+      standings_mass_start: season |> get_standing("Mas"),
+      standings_overall: season |> get_standing("Tot")
     }
 
     acc = Map.put(acc, season_id, standings)

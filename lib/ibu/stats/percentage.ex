@@ -26,10 +26,10 @@ defmodule IBU.Stats.Percentage do
 
     stats =
       Map.put(acc[season_id], :shooting_percentage, shooting)
-      |> Map.put(:prone_shoot_percentage, prone)
-      |> Map.put(:overall_shoot_percentage, shooting)
-      |> Map.put(:standing_shoot_percentage, standing)
-      |> Map.put(:skiing_percentage, skiing)
+      |> Map.put(:shooting_prone_percentage, prone)
+      |> Map.put(:shooting_overall_percentage, shooting)
+      |> Map.put(:shooting_stand_percentage, standing)
+      |> Map.put(:skiing_speed_percentage, skiing)
 
     build_percentages(t, data, Map.put(acc, season_id, stats))
   end
