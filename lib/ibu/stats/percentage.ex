@@ -34,10 +34,11 @@ defmodule IBU.Stats.Percentage do
     build_percentages(t, data, Map.put(acc, season_id, stats))
   end
 
-  defp get_stat(data, binary, index) when is_binary(binary) do
+  defp get_stat(data, key, index) when is_binary(key) do
     data
-    |> Map.get("StatSeasons")
+    |> Map.get(key)
     |> Enum.fetch!(index)
+    |> String.replace(~r/[^\d]/, "")
     |> String.split("/")
     |> Enum.join()
     |> String.to_integer()
