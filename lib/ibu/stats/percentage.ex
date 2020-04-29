@@ -4,9 +4,9 @@ defmodule IBU.Stats.Percentage do
 
   @spec build(map) :: map
   def build(data) do
-      Range.new(0, Enum.count(data["StatSeasons"]) - 1)
-      |> Enum.to_list()
-      |> build_percentages(data)
+    Range.new(0, Enum.count(data["StatSeasons"]) - 1)
+    |> Enum.to_list()
+    |> build_percentages(data)
   end
 
   @spec build_percentages([integer], any) :: any

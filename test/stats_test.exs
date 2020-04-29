@@ -16,7 +16,8 @@ defmodule StatsTest do
 
     response = IBU.Stats.merge([map_one, map_two])
 
-    assert %{1819 => %{one: "one", two: "two", three: "three"}, 1920 => %{four: "four"}} = response
+    assert %{1819 => %{one: "one", two: "two", three: "three"}, 1920 => %{four: "four"}} =
+             response
   end
 
   test "merge with three items" do
@@ -26,6 +27,10 @@ defmodule StatsTest do
 
     response = IBU.Stats.merge([map_one, map_two, map_three])
 
-    assert %{1819 => %{one: "one", two: "two", three: "three"}, 1920 => %{four: "four", five: "five"}, 2021 => %{six: "six"}} = response
+    assert %{
+             1819 => %{one: "one", two: "two", three: "three"},
+             1920 => %{four: "four", five: "five"},
+             2021 => %{six: "six"}
+           } = response
   end
 end
