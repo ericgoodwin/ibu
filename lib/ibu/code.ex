@@ -36,8 +36,8 @@ defmodule IBU.Code do
   end
 
   def parse(
-        <<66, 84, season::binary-size(4), 83, level::binary-size(5),
-          race_number::binary-size(2), gender::binary-size(2), event::binary-size(2)>>
+        <<66, 84, season::binary-size(4), 83, level::binary-size(5), race_number::binary-size(2),
+          gender::binary-size(2), event::binary-size(2)>>
       )
       when gender in ["SM", "SW", "MX"] and level in ["WRLCP", "WRLCH", "WRLOG"] do
     {:race,
