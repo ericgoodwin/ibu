@@ -1,22 +1,22 @@
 defmodule IBU.Code do
-  @spec parse(binary) :: {atom, keyword}
+  @spec parse(binary) :: {atom, map}
 
   def parse(
         <<66, 84, season::binary-size(4), 83, level::binary-size(5), 95, 95,
           gender::binary-size(2), event::binary-size(2)>>
       ) do
-    {:cup,
-     [
+    {:ok, :cup,
+     %{
        season: String.to_integer(season),
        gender: parse_gender(gender),
        event: parse_event_code(event),
        level: parse_level(level)
-     ]}
+    }}
   end
 
   def parse(<<66, 84, country_code::binary-size(3), gender::binary-size(1)>>)
       when gender in ["1", "2", "9"] do
-    {:team, [country_code: country_code, gender: parse_gender(gender)]}
+    {:ok, :team, %{country_code: country_code, gender: parse_gender(gender)}}
   end
 
   def parse(
@@ -24,15 +24,15 @@ defmodule IBU.Code do
           birth_month::binary-size(2), birth_year::binary-size(4), number::binary-size(2)>>
       )
       when gender in ["1", "2"] do
-    {:individual,
-     [
+    {:ok, :individual,
+     %{
        country_code: country_code,
        gender: parse_gender(gender),
        birth_day: String.to_integer(birth_day),
        birth_month: String.to_integer(birth_month),
        birth_year: String.to_integer(birth_year),
        number: String.to_integer(number)
-     ]}
+     }}
   end
 
   def parse(
@@ -40,14 +40,14 @@ defmodule IBU.Code do
           gender::binary-size(2), event::binary-size(2)>>
       )
       when gender in ["SM", "SW", "MX"] and level in ["WRLCP", "WRLCH", "WRLOG"] do
-    {:race,
-     [
+    {:ok, :race,
+     %{
        season: String.to_integer(season),
        level: parse_level(level),
        race_number: parse_race_number(race_number),
        gender: parse_gender(gender),
        event: parse_event_code(event)
-     ]}
+    }}
   end
 
   def parse(
@@ -55,12 +55,16 @@ defmodule IBU.Code do
           competition_number::binary-size(2)>>
       )
       when level in ["WRLCP", "WRLCH", "WRLOG"] do
-    {:competition,
-     [
+    {:ok, :competition,
+     %{
        season: String.to_integer(season),
        level: parse_level(level),
        competition_number: parse_race_number(competition_number)
-     ]}
+    }}
+  end
+
+  def parse(<<country_code::binary-size(3)>>) do
+    {:ok, :nation, %{country_code: country_code}}
   end
 
   def parse(str), do: {:error, :unknown_format, str}
