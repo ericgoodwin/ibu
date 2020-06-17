@@ -38,9 +38,10 @@ defmodule IBU.Stats.Percentage do
     data
     |> Map.get(key)
     |> Enum.fetch!(index)
+    |> to_string
     |> String.replace(~r/[^\d]/, "")
     |> String.split("/")
     |> Enum.join()
-    |> String.to_integer()
+    |> IBU.Utils.try_integer
   end
 end
