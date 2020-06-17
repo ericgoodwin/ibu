@@ -25,4 +25,8 @@ defmodule IBU.Utils do
   defp deep_resolve(_key, _left, right) do
     right
   end
+
+  @spec try_integer(<<>>) :: nil | integer
+  def try_integer(""), do: nil
+  def try_integer(num), do: String.to_integer(num)
 end
