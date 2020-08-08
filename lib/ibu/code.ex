@@ -64,7 +64,7 @@ defmodule IBU.Code do
   end
 
   def parse(<<country_code::binary-size(3)>>) do
-    {:ok, :nation, %{country_code: country_code}}
+    {:ok, :nation, %{country_code: country_code, gender: :mixed}}
   end
 
   def parse(str), do: {:error, :unknown_format, str}
