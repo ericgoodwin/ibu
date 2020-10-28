@@ -4,7 +4,10 @@ defmodule IBUTest do
   # doctest IBU
 
   setup do
-    Tesla.Mock.mock(fn
+    # Using `mock_global` instead of `mock` due to a bug where Telsa.Middleware.Timeout
+    # will cause it to run in a different process and we won't find the mock
+    # See: https://github.com/teamon/tesla/issues/157
+    Tesla.Mock.mock_global(fn
       %{
         method: :get,
         url:
@@ -25,7 +28,13 @@ defmodule IBUTest do
                 "NAT" => "FRA",
                 "NF" => "FRA",
                 "otherFamilyNames" => nil,
-                "otherGivenNames" => nil
+                "otherGivenNames" => nil,
+                "StatSeasons" => [],
+                "StatShooting" => [],
+                "StatShootingProne" => [],
+                "StatShootingStanding" => [],
+                "StatSkiing" => [],
+                "WC" => []
               },
               %{
                 "Age" => 35,
@@ -38,7 +47,13 @@ defmodule IBUTest do
                 "NAT" => "FRA",
                 "NF" => "FRA",
                 "otherFamilyNames" => nil,
-                "otherGivenNames" => nil
+                "otherGivenNames" => nil,
+                "StatSeasons" => [],
+                "StatShooting" => [],
+                "StatShootingProne" => [],
+                "StatShootingStanding" => [],
+                "StatSkiing" => [],
+                "WC" => []
               }
             ]
           }
