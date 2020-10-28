@@ -20,18 +20,19 @@ defmodule IBU.Stats.Standing do
     case season do
       nil ->
         build_standings(t, data, acc)
+
       season ->
         standings = %{
-        standings_individual: season |> get_standing("Ind"),
-        standings_sprint: season |> get_standing("Spr"),
-        standings_pursuit: season |> get_standing("Pur"),
-        standings_mass_start: season |> get_standing("Mas"),
-        standings_overall: season |> get_standing("Tot")
-      }
+          standings_individual: season |> get_standing("Ind"),
+          standings_sprint: season |> get_standing("Spr"),
+          standings_pursuit: season |> get_standing("Pur"),
+          standings_mass_start: season |> get_standing("Mas"),
+          standings_overall: season |> get_standing("Tot")
+        }
 
-      acc = Map.put(acc, season_id, standings)
+        acc = Map.put(acc, season_id, standings)
 
-      build_standings(t, data, acc)
+        build_standings(t, data, acc)
     end
   end
 
@@ -40,7 +41,7 @@ defmodule IBU.Stats.Standing do
     |> Map.fetch!(category)
     |> to_string
     |> String.replace(~r/[^\d]/, "")
-    |> IBU.Utils.try_integer
+    |> IBU.Utils.try_integer()
   end
 
   defp season_id_key_mapping(season_id) do

@@ -11,7 +11,7 @@ defmodule IBU.Code do
        gender: parse_gender(gender),
        event: parse_event_code(event),
        level: parse_level(level)
-    }}
+     }}
   end
 
   def parse(<<66, 84, country_code::binary-size(3), gender::binary-size(1)>>)
@@ -47,7 +47,7 @@ defmodule IBU.Code do
        race_number: parse_race_number(race_number),
        gender: parse_gender(gender),
        event: parse_event_code(event)
-    }}
+     }}
   end
 
   def parse(
@@ -60,7 +60,7 @@ defmodule IBU.Code do
        season: String.to_integer(season),
        level: parse_level(level),
        competition_number: parse_race_number(competition_number)
-    }}
+     }}
   end
 
   def parse(<<country_code::binary-size(3)>>) do
