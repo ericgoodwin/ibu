@@ -2,7 +2,11 @@ defmodule IBU.Stats.Percentage do
   @moduledoc """
   """
 
+  # If we don't have any stat season then do not bother trying to get
+  # percentages for stats
   @spec build(map) :: map
+  def build(%{"StatSeasons" => []}), do: %{}
+
   def build(data) do
     Range.new(0, Enum.count(data["StatSeasons"]) - 1)
     |> Enum.to_list()
@@ -42,6 +46,6 @@ defmodule IBU.Stats.Percentage do
     |> String.replace(~r/[^\d]/, "")
     |> String.split("/")
     |> Enum.join()
-    |> IBU.Utils.try_integer
+    |> IBU.Utils.try_integer()
   end
 end
