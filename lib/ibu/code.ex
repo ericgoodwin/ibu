@@ -67,6 +67,10 @@ defmodule IBU.Code do
     {:ok, :nation, %{country_code: country_code, gender: :mixed}}
   end
 
+  def parse("MKD_FYROM") do
+    {:ok, :nation, %{country_code: "MKD", gender: :mixed}}
+  end
+
   def parse(str), do: {:error, :unknown_format, str}
 
   @spec parse_gender(binary) :: atom
