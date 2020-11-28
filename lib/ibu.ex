@@ -7,7 +7,7 @@ defmodule IBU do
   plug(Tesla.Middleware.Timeout, timeout: 5_000)
   plug(Tesla.Middleware.Logger)
 
-  alias IBU.{Athlete, Event, Result, Race, Standing, Cup}
+  alias IBU.{Athlete, Event, Result, Race, Standing, Cup, Starting}
 
   @spec search_athletes(binary, binary | nil) :: {:ok, [Athlete.t()]} | {:error, any()}
   def search_athletes(last_name, first_name \\ nil) do
@@ -175,6 +175,24 @@ defmodule IBU do
 
       {:ok, %{body: %{"IsResult" => false}}} ->
         {:error, :race_not_final}
+    end
+  end
+
+  @spec get_race_starting_list(binary) :: {:ok, [Starting.t()]} | {:error, binary}
+  def get_race_starting_list(race_id) do
+    case get("Results?RaceId=#{race_id}") do
+      {:error, reason} ->
+        {:error, reason}
+
+      {:ok, %{body: %{"IsResult" => false, "Results" => results}}} ->
+        result =
+          results
+          |> Enum.map(fn data -> Starting.build_from_api(data, race_id) end)
+
+        {:ok, result}
+
+      {:ok, %{body: %{"IsResult" => true}}} ->
+        {:error, :race_final}
     end
   end
 
