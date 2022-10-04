@@ -29,6 +29,13 @@ defmodule ParseTest do
              country_code: "GER",
              gender: :male
            } = data
+
+    assert {:ok, :team, data} = Code.parse("BTROC9")
+
+    assert %{
+             country_code: "RUS",
+             gender: :mixed
+           } = data
   end
 
   test "race" do

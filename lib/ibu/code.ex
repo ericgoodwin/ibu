@@ -14,6 +14,12 @@ defmodule IBU.Code do
      }}
   end
 
+  # ROC team
+  def parse(<<66, 84, 82, 79, 67, gender::binary-size(1)>>)
+      when gender in ["1", "2", "9"] do
+    {:ok, :team, %{country_code: "RUS", gender: parse_gender(gender)}}
+  end
+
   def parse(<<66, 84, country_code::binary-size(3), gender::binary-size(1)>>)
       when gender in ["1", "2", "9"] do
     {:ok, :team, %{country_code: country_code, gender: parse_gender(gender)}}
