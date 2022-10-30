@@ -24,9 +24,9 @@ defmodule IBU.MixProject do
   defp deps() do
     [
       {:dialyxir, "~> 0.5", only: [:dev], runtime: false},
-      {:hackney, "~> 1.15.2"},
+      {:hackney, "~> 1.15"},
       {:jason, ">= 1.0.0"},
-      {:tesla, "~> 1.3.0"}
+      {:tesla, "~> 1.3"}
     ]
   end
 
