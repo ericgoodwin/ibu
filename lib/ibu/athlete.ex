@@ -49,4 +49,5 @@ defmodule IBU.Athlete do
   defp get_status("Athlete, Official"), do: "athlete"
   defp get_status("Not active"), do: "inactive"
   defp get_status("Official"), do: "official"
+  defp get_status(nil), do: nil
 end
