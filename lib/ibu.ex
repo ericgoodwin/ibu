@@ -129,7 +129,7 @@ defmodule IBU do
   """
   @spec get_race_details(binary) :: {:ok, Race.t(), Event.t(), list} | {:error, any()}
   def get_race_details(race_id) do
-    case get("Results?RT=385698&RaceId=#{race_id}") do
+    case get("Results?RaceId=#{race_id}") do
       {:error, reason} ->
         {:error, reason}
 
@@ -162,7 +162,7 @@ defmodule IBU do
 
   @spec get_race_results(binary) :: {:ok, [Result.t()]} | {:error, binary}
   def get_race_results(race_id) do
-    case get("Results?RT=385698&RaceId=#{race_id}") do
+    case get("Results?RaceId=#{race_id}") do
       {:error, reason} ->
         {:error, reason}
 
@@ -180,7 +180,7 @@ defmodule IBU do
 
   @spec get_race_starting_list(binary) :: {:ok, [Starting.t()]} | {:error, binary}
   def get_race_starting_list(race_id) do
-    case get("Results?RT=385698&RaceId=#{race_id}") do
+    case get("Results?RaceId=#{race_id}") do
       {:error, reason} ->
         {:error, reason}
 
