@@ -11,7 +11,7 @@ by adding `ibu` to your list of dependencies in `mix.exs`:
 ```elixir
 def deps do
   [
-    {:ibu, "~> 0.3.6"}
+    {:ibu, "~> 0.3.3"}
   ]
 end
 ```
