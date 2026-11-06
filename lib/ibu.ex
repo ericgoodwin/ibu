@@ -3,6 +3,7 @@ defmodule IBU do
 
   plug(Tesla.Middleware.BaseUrl, "https://biathlonresults.com/modules/sportapi/api/")
   plug(Tesla.Middleware.Headers, [{"Accept", "application/json"}])
+  plug(IBU.ApiKey)
   plug(Tesla.Middleware.JSON)
   plug(Tesla.Middleware.Timeout, timeout: 5_000)
   plug(Tesla.Middleware.Logger)
