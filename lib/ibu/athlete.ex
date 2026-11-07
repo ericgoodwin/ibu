@@ -44,10 +44,11 @@ defmodule IBU.Athlete do
     }
   end
 
-  @spec get_status(binary) :: binary
+  @spec get_status(binary | nil) :: binary | nil
   defp get_status("Athlete"), do: "athlete"
   defp get_status("Athlete, Official"), do: "athlete"
   defp get_status("Not active"), do: "inactive"
   defp get_status("Official"), do: "official"
-  defp get_status(nil), do: nil
+  defp get_status("Deceased"), do: "deceased"
+  defp get_status(_), do: nil
 end
